@@ -2,6 +2,7 @@ package TorneoDeFrescas.BD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 public class Consultas {
@@ -10,8 +11,9 @@ public class Consultas {
     }
 
     public void guardarBatalla(String equipo, int litrosConsumidos){
-        Conexion con = new Conexion();
-        Connection conexion = con.getCon();
+        Connection conexion = null;
+
+        PreparedStatement preparedStatement = null;
 
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
@@ -19,16 +21,21 @@ public class Consultas {
         String query = "insert into ganadores(nombreEquipo, litrosConsumidos, fecha) values(?, ?, ?)";
 
         try{
-            PreparedStatement preparedStatement = conexion.prepareStatement(query);
+            conexion = Conexion.getCon();
+            preparedStatement = conexion.prepareStatement(query);
             preparedStatement.setString(1,equipo);
             preparedStatement.setInt(2,litrosConsumidos);
             preparedStatement.setDate(3,startDate);
 
             preparedStatement.execute();
-
-            conexion.close();
         } catch (Exception e){
             System.out.println(e);
+        } finally {
+            try {
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
