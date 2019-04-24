@@ -98,7 +98,7 @@ public class App {
 
             System.out.println("El vikingo comienza a beber ... Bebe " + vkBebe + " litros de cerveza.");
 
-            if (vkBebe > vkOrina){
+            if (vkBebe >= vkOrina){
                 System.out.println("El vikingo solo puede beber " + vkOrina + " litros. Bebe mas de su capacidad. Corre al baño !! Es descalificado.");
                 System.out.println("--------------------");
                 //lo eliminamos de la lista
@@ -113,7 +113,7 @@ public class App {
 
             System.out.println("El espartano comienza a beber ... Bebe " + espBebe + " litros de cerveza.");
 
-            if (espBebe > espOrina){
+            if (espBebe >= espOrina){
                 System.out.println("El espartano solo puede beber " + espOrina + " litros. Bebe mas de su capacidad. Corre al baño !! Es descalificado.\n");
                 //lo eliminamos de la lista
                 listaEspartanos = listaEspartanos.stream()
